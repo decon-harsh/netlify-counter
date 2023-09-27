@@ -1,16 +1,13 @@
-const app = require('../server'); // Import the Express app
+// lambda/get-counter.js
 
-exports.handler = async (event, context) => {
-  app.get('/get-counter', (req, res) => {
-    res.json({ counter });
-  });
+const express = require('express');
+const app = express();
 
-  const response = await app(event, context); // Handle the request using the Express app
-  return {
-    statusCode: response.statusCode,
-    body: response.body,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-};
+let counter = 0;
+
+app.get('/get-counter', (req, res) => {
+  res.json({ counter });
+});
+
+// Export the Express app for Netlify Functions
+module.exports = app;
